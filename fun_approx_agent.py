@@ -12,7 +12,7 @@ class FunctionApproximationAgent(Agent):
         super(FunctionApproximationAgent, self).__init__()
         # Add member variables to your class here
         self.num_features = 3
-        self.weights = np.random.randn(self.num_features)
+        self.weights = np.abs(np.random.randn(self.num_features))
         self.total_reward = 0
 
         # Helper dictionaries that allow us to move from actions to
@@ -106,7 +106,7 @@ class FunctionApproximationAgent(Agent):
         next_q_values = self.weights.T.dot(self.next_features)
         new_weights = self.weights + self.alpha * (self.reward + self.gamma * np.max(next_q_values) - self.q_values[self.act2idx[self.action]]) * self.current_features[:,self.act2idx[self.action]]
         self.weights = new_weights
-
+	
     def callback(self, learn, episode, iteration):
         """ Called at the end of each timestep for reporting/debugging purposes.
         """
