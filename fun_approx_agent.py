@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import pickle
 
 from enduro.agent import Agent
 from enduro.action import Action
@@ -226,9 +227,9 @@ class FunctionApproximationAgent(Agent):
         return feature_values
 
     def carCollision (self, selfX, selfW, carX, carW):
-        if carX >= selfX  and carX <= selfX + selfW:
+        if carX >= selfX  and carX <= selfX + selfW + 15:
             return 'right'
-        elif carX + carW >= selfX  and carX + carW <= selfX + selfW:
+        elif carX + carW >= selfX - 15  and carX + carW <= selfX + selfW:
             return 'left'
         else:
             return 'ok'
